@@ -1,49 +1,75 @@
+const API_URL = 'http://localhost:4000'
+
 class Adapter {
 
+
+    static isLoggedIn() {
+        return !!localStorage.getItem('token')
+    }
+
+    // static isLoggedIn() {
+    //       return fetch(`${API_URL}/sessions/`, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": 'application/json',
+    //             'Authorization': localStorage.getItem('token')
+    //         },
+    //     })
+    // }
+
     // static getUser() {
-    //     return fetch(`http://localhost:4000/users/`, {
-    //     method: 'POST',
-    //     headers: {
-    //         "Content-Type": 'application/json'
-    //     },
-    //     body: JSON.stringify({firstName, lastName, userName, password })
+    //     return fetch(`${API_URL}/sessions/`, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": 'application/json',
+    //             'Authorization': localStorage.getItem('token')
+    //         },
     //     });
     // }
 
     static signUp(firstName, lastName, userName, password) {
-        return fetch(`http://localhost:4000/users/`, {
+        return fetch(`${API_URL}/users/`, {
         method: 'POST',
         headers: {
-            "Content-Type": 'application/json'
+            "Content-Type": 'application/json',
+            'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify({firstName, lastName, userName, password })
         });
     }
 
     static logIn(userName, password) {
-        return fetch(`http://localhost:4000/sessions/`, {
+        return fetch(`${API_URL}/sessions/`, {
             method: 'POST',
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
             },
             body: JSON.stringify({userName, password })
             });
     }
 
     static getAllSkus() {
-        return fetch(`http://localhost:4000/products/`);
+        return fetch(`${API_URL}/products/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
     }
 
 
     static getSku(skuId) {
-        return fetch(`http://localhost:4000/products/`+ skuId);
+        return fetch(`${API_URL}/products/`+ skuId);
     }
 
     static editProduct(skuId, body) {
-        return fetch(`http://localhost:4000/products/` + skuId, {
+        return fetch(`${API_URL}/products/` + skuId, {
             method: 'PATCH',
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
             },
             body: JSON.stringify({body})
             });
@@ -51,10 +77,11 @@ class Adapter {
     
 
     static addSkuToManageInv(skuId, body) {
-        return fetch(`http://localhost:4000/products/` + skuId, {
+        return fetch(`${API_URL}/products/` + skuId, {
             method: 'PATCH',
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
             },
             body: JSON.stringify({body})
             });
@@ -62,20 +89,18 @@ class Adapter {
 
     // Handles both requesting a report and exporting a report 
     static requestReport(reportName) {
-        return fetch(`http://localhost:4000/reports/` + reportName)
+        return fetch(`${API_URL}/reports/` + reportName)
     }
 
     static getRecentReports() {
-        return fetch(`http://localhost:4000/reports/`);
+        return fetch(`${API_URL}/reports/`);
     }
 
     static getFees() {
-        return fetch(`http://localhost:4000/fees/`)
+        return fetch(`${API_URL}/fees/`)
     }
 
-    static isLoggedIn() {
-        return !!localStorage.getItem('token')
-    }
+    
     
     static logout() {
         localStorage.removeItem('token');

@@ -32,7 +32,6 @@ class MainMenu extends Component {
     
 
     render() {
-        console.log(this.props)
         const { activeItem } = this.state
         return (
             <div>

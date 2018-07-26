@@ -19,11 +19,7 @@ import { withRouter } from 'react-router-dom';
 
 class App extends Component {
 
-  componentDidMount = () => {
-    // Testing redux then will add adapter functionality to work
-    // Adapter.getUser().then(r=> r.json()).then()
-    this.props.setCurrentUser(1)    
-  }
+ 
   
   render() {
     return (
@@ -31,7 +27,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/login" component={LogInForm}/>
           <Route exact path="/signup" component={SignUpForm}/>
-          {Adapter.isLoggedIn() ? 
+          {Adapter.isLoggedIn() ?    
           <React.Fragment>
           <MainMenu {...this.props}/> 
           <Route exact path="/products" component={ (props) => {return ( <ProductsList {...props}/> )}  }/>
@@ -41,7 +37,7 @@ class App extends Component {
           <Route exact path="/fees" component={ (props) => {return ( <FeesContainer {...props}/> )}  }/>
           <Route exact path="/" component={ (props) => {return ( <HomeContainer {...props} />)} }/> 
           </React.Fragment>
-          : <Redirect to="/login" />}
+          : <Redirect to="/login" /> }
           
         </ Switch>
       </div>

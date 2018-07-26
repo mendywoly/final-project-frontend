@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Adapter from './Adapter'
 import ProductListItem from './ProductListItem'
 import {Checkbox, Modal, Button } from 'semantic-ui-react'
+import {Redirect } from 'react-router-dom'
+
 
 
 class ProductsList extends Component {
@@ -21,10 +23,10 @@ class ProductsList extends Component {
 
     // Fetch all skus, Want to change backend to only render the just skus and not details to improve preformance. 
     fetchSkus = () => {
-        Adapter.getAllSkus().then(r => r.json()).then(d => {
+        Adapter.getAllSkus().then(r => r.json() ).then(d => {
             const sortedData = d.sort( (a, b) => a.value - b.value)
             this.setState({ skus: sortedData })
-        })
+        }).catch( e=>  this.props.history.push('/login') )
     }
 
     // Handles Navigation to product detail page. Based on click from product list page 
