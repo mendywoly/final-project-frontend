@@ -7,26 +7,6 @@ class Adapter {
         return !!localStorage.getItem('token')
     }
 
-    // static isLoggedIn() {
-    //       return fetch(`${API_URL}/sessions/`, {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type": 'application/json',
-    //             'Authorization': localStorage.getItem('token')
-    //         },
-    //     })
-    // }
-
-    // static getUser() {
-    //     return fetch(`${API_URL}/sessions/`, {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type": 'application/json',
-    //             'Authorization': localStorage.getItem('token')
-    //         },
-    //     });
-    // }
-
     static signUp(firstName, lastName, userName, password) {
         return fetch(`${API_URL}/users/`, {
         method: 'POST',
@@ -61,7 +41,13 @@ class Adapter {
 
 
     static getSku(skuId) {
-        return fetch(`${API_URL}/products/`+ skuId);
+        return fetch(`${API_URL}/products/`+ skuId, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
     }
 
     static editProduct(skuId, body) {
