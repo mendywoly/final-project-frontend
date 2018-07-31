@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 class UpdateUser extends Component {
 
     state = {
-        firstName: '', 
-        lastName: '', 
-        userName: '', 
+        first_name: '', 
+        last_name: '', 
+        username: '', 
         password: '',
     }
 
@@ -17,11 +17,11 @@ class UpdateUser extends Component {
     }
 
     fetchUserDetails = () => {
-      Adapter.getUser(2).then( r => r.json() ).then(d => {
+      Adapter.getCurrentUser().then( r => r.json() ).then(d => {
           this.setState({
-            firstName: d.first_name, 
-            lastName: d.last_name, 
-            userName: d.username, 
+            first_name: d.first_name, 
+            last_name: d.last_name, 
+            username: d.username, 
             password: '',
           })
       })
@@ -31,21 +31,21 @@ class UpdateUser extends Component {
     
     handleChange = (e, {name, value}) => this.setState({ [name]: value})
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const {firstName, lastName, userName, password  } = this.state
+    // handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const {first_name, last_name, username, password  } = this.state
 
-        Adapter.signUp(firstName, lastName, userName, password)
-        .then(this.handleErrors)
-        .then(d => {
-            localStorage.setItem('token', d.token )
-            this.props.history.push('/')
-        })
-        .catch(function(error) {
-            alert("Wrong Username or Password")
-        })
+    //     Adapter.signUp(first_name, last_name, username, password)
+    //     .then(this.handleErrors)
+    //     .then(d => {
+    //         localStorage.setItem('token', d.token )
+    //         this.props.history.push('/')
+    //     })
+    //     .catch(function(error) {
+    //         alert("Wrong username or Password")
+    //     })
         
-    }
+    // }
 
     handleErrors(response) {
         if (!response.ok) {
@@ -53,11 +53,17 @@ class UpdateUser extends Component {
         }
         return response.json();
     }
+
+    handleSubmit = (event) => {
+      event.preventDefault()
+      Adapter.updateUser(this.state, 1).then( r => r.json() ).then(console.log)
+    }
+    
     
 
     render() {
 
-        const {firstName, lastName, userName, password  } = this.state
+        const {first_name, last_name, username, password  } = this.state
 
         return (        
             <div>
@@ -68,25 +74,25 @@ class UpdateUser extends Component {
                                 <Form.Input 
                                     label="First Name" 
                                     placeholder='First Name'
-                                    name='firstName'
+                                    name='first_name'
                                     onChange={this.handleChange}
-                                    value={firstName}
+                                    value={first_name}
                                 />
                                 <Form.Input 
                                     label="Last Name" 
                                     placeholder='Last Name' 
-                                    name='lastName'
+                                    name='last_name'
                                     onChange={this.handleChange}
-                                    value={lastName}
+                                    value={last_name}
                                 />
                             </Form.Group>
                             <Form.Group  >
                                 <Form.Input 
-                                    label="Username" 
-                                    placeholder='Username'
-                                    name='userName' 
+                                    label="username" 
+                                    placeholder='username'
+                                    name='username' 
                                     onChange={this.handleChange}
-                                    value={userName}
+                                    value={username}
                                 />
                                 <Form.Input 
                                     label="Password" 

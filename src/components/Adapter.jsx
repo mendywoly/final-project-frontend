@@ -49,6 +49,29 @@ class Adapter {
         })
     }
 
+    static getCurrentUser () {
+        return fetch(`${API_URL}/users/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
+    }
+
+    static updateUser(body, id) {
+        return fetch(`${API_URL}/users/` + id, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify({body})
+            });
+    }
+
+
+
     static getAllSkus() {
         return fetch(`${API_URL}/products/`, {
             method: 'GET',
@@ -122,6 +145,18 @@ class Adapter {
     
     static getJWT() {
         return localStorage.getItem('token');
+    }
+
+    // All fees fetches go here.
+
+    static getCurrentUserFeesPreview() {
+        return fetch(`${API_URL}/fees/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
     }
 
 }

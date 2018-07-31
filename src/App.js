@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import {Route, Switch, Redirect } from 'react-router-dom'
 import Adapter from './components/Adapter'
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom';
 
 import MainMenu from './components/MainMenu'
 import SignUpForm from './components/SignUpForm'
 import LogInForm from './components/LogInForm'
-import FeesContainer from './containers/FeesContainer'
+import FeesContainer from './components/fees/FeesContainer'
 import InvManagement from './components/InvManagement'
 import Reports from './components/Reports'
 import ProductsList from './components/ProductsList'
 import ProductContainer from './containers/ProductContainer'
 import HomeContainer from './containers/HomeContainer'
-import {connect} from 'react-redux'
-import { withRouter } from 'react-router-dom';
 import UpdateUser from './components/users/UpdateUser'
 
 
