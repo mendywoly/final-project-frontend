@@ -25,6 +25,9 @@ class MainMenu extends Component {
         if (name === 'home') {
             this.props.history.push('/')
         }
+        if (name === 'profile') {
+            this.props.history.push('/profile')
+        }
 
 
     }

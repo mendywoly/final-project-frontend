@@ -86,34 +86,36 @@ class ProductsList extends Component {
         return (
             <div>
                 <br/>
-                <input 
-                        type="text"
-                        placeholder="Search By Name"
-                        name="product_name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                     />
-                    <input 
-                        type="text"
-                        placeholder="Search By Asin"
-                        name="asin"
-                        value={this.state.asin}
-                        onChange={this.handleChange}
-                     />
-                    <input 
-                        type="text"
-                        placeholder="Search By Fnsku"
-                        name="fnsku"
-                        value={this.state.fnsku}
-                        onChange={this.handleChange}
-                    />
-                     <input 
-                        type="text"
-                        placeholder="Search By Msku"
-                        name="msku"
-                        value={this.state.msku}
-                        onChange={this.handleChange}
-                    />
+                <div className="ui input"   >
+                    <input                        
+                            type="text"
+                            placeholder="Search By Name"
+                            name="product_name"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Asin"
+                            name="asin"
+                            value={this.state.asin}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Fnsku"
+                            name="fnsku"
+                            value={this.state.fnsku}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Msku"
+                            name="msku"
+                            value={this.state.msku}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
                     <table  className="ui celled table">
                     <thead>
@@ -123,6 +125,7 @@ class ProductsList extends Component {
                                 onClick={this.handleCheckedAll}
                                 />
                             </th>
+                            <th className="seven wide" >Product Name</th>
                             <th>Asin</th>
                             <th>Fsnku</th>
                             <th>Sku</th>

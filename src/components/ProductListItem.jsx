@@ -15,7 +15,7 @@ class ProductListItem extends Component {
     // }
     
     render() {                
-        const {asin, msku, fnsku, id } = this.props.details               
+        const {asin, msku, fnsku, id, product_name } = this.props.details               
         return (
             <React.Fragment>
                 <tr >
@@ -25,6 +25,7 @@ class ProductListItem extends Component {
                             onClick={ (event) => this.props.checkedHandler(event, this.props.details.id)  }
                         />
                     </td>
+                    <td>{product_name}</td>
                     <td>{asin}</td>
                     <td>{fnsku}</td>
                     <td>{msku}</td>

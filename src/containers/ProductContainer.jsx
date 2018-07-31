@@ -30,7 +30,6 @@ class Product extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
-      console.log(this.state)
     }
 
     handleChange = (event) => {

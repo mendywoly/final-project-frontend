@@ -2,6 +2,16 @@ const API_URL = 'http://localhost:4000'
 
 class Adapter {
 
+    static getTopProducts(range) {
+        return fetch(`${API_URL}/topProducts`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify({range}),
+        })
+    }
 
     static isLoggedIn() {
         return !!localStorage.getItem('token')
@@ -27,6 +37,16 @@ class Adapter {
             },
             body: JSON.stringify({userName, password })
             });
+    }
+
+    static getUser (id) {
+        return fetch(`${API_URL}/users/` + id, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
     }
 
     static getAllSkus() {
@@ -74,8 +94,16 @@ class Adapter {
     }
 
     // Handles both requesting a report and exporting a report 
-    static requestReport(reportName) {
-        return fetch(`${API_URL}/reports/` + reportName)
+    static requestReport(generatedReportId) {
+        return fetch(`${API_URL}/getReport/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                generatedReportId
+            })
+          })
     }
 
     static getRecentReports() {

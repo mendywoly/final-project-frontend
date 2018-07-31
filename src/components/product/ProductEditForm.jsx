@@ -5,7 +5,7 @@ import Adapter from '../Adapter'
 class ProductEditForm extends Component {
     constructor(props) {
         super(props);        
-        this.state = {...props.details}
+        this.state = {details: {...props.details}, saved: true}
     }
   
     
@@ -15,19 +15,25 @@ class ProductEditForm extends Component {
     }
 
     handleChange = (event) => {
-      this.setState({ [event.target.name]: event.target.value })
+      this.setState({ details: {...this.state.details, [event.target.name]: event.target.value }, saved: false })
     }
     
     handleSubmit = (event) => {
       event.preventDefault()
-      Adapter.editProduct(this.state.id, this.state).then(r=>r.json()).then(this.props.initalFetch)
+      Adapter.editProduct(this.state.details.id, this.state.details).then(r=> {
+          if (r.ok) {
+              this.setState({saved: true})
+              return r.json()
+          } else { alert("Something went worng please try again")}
+      }).then(this.props.initalFetch)
     }
  
+
     
 
     
     render() {       
-        const { quantity_default_warehouse, lead_time, desired_days_of_stock, on_inv_management } = this.state
+        const { quantity_default_warehouse, lead_time, desired_days_of_stock, on_inv_management, prep_instructions } = this.state.details
         return (
             <Segment>
                  <h3>Edit Product</h3>
@@ -39,7 +45,7 @@ class ProductEditForm extends Component {
                         label={on_inv_management ? "Remove" : "Add"}
                         defaultChecked={on_inv_management ? true : false }
                         name="on_inv_management"
-                        onChange={(e,d) => this.setState({ on_inv_management: d.checked })}
+                        onChange={(e,d) => this.setState({ details: {...this.state.details, on_inv_management: d.checked}, saved: false  })}
                          />
                         <br/>
                         <br/>
@@ -70,10 +76,19 @@ class ProductEditForm extends Component {
                         />
                         <br/>
                         <br/>
+                        <textarea 
+                        label='Prep Instructions' 
+                        name="prep_instructions"
+                        cols="30" 
+                        rows="10" 
+                        value={prep_instructions}
+                        onChange={this.handleChange}
+                        ></textarea>
                         <br/>
                         <br/>
                         <br/>
-                        <Button type='submit'>Submit</Button>
+                        {this.state.saved ? <Button disabled>Changed Saved</Button> : <Button color='green' type='submit'>Save</Button>}
+                      
                     </Form>
             </Segment>
         );

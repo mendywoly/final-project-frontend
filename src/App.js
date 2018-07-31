@@ -14,6 +14,7 @@ import ProductContainer from './containers/ProductContainer'
 import HomeContainer from './containers/HomeContainer'
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import UpdateUser from './components/users/UpdateUser'
 
 
 
@@ -35,7 +36,9 @@ class App extends Component {
           <Route exact path="/invmanagement" component={ (props) => {return ( <InvManagement {...props}/> )}  }/>
           <Route exact path="/reports" component={ (props) => {return ( <Reports {...props}/> )}  }/>
           <Route exact path="/fees" component={ (props) => {return ( <FeesContainer {...props}/> )}  }/>
-          <Route exact path="/" component={ (props) => {return ( <HomeContainer {...props} />)} }/> 
+          <Route exact path="/" component={ (props) => {return ( <HomeContainer {...props} />)} }/>
+          <Route exact path="/profile" component={ (props) => {return ( <UpdateUser {...props} />)} }/>
+           
           </React.Fragment>
           : <Redirect to="/login" /> }
           
