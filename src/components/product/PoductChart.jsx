@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import ReactChartkick, { LineChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart)
@@ -8,7 +8,6 @@ ReactChartkick.addAdapter(Chart)
 class ProductChart extends Component {
   render() {
     const {units_shipped_last_24_hrs, units_shipped_last_7_days, units_shipped_last_30_days, units_shipped_last_90_days, units_shipped_last_180_days, units_shipped_last_365_days} = this.props.details
-    const three_six_five = 'sdf'
     return (
       <div>
         <LineChart data={{

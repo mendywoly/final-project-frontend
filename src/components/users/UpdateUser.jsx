@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react'
 import Adapter from '../Adapter'
-import { Link } from 'react-router-dom'
 
 class UpdateUser extends Component {
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react'
 import Adapter from './Adapter'
 import { Link } from 'react-router-dom'
+import Progress from '../components/Progress'
 
 class SignUpForm extends Component {
 
@@ -10,12 +11,14 @@ class SignUpForm extends Component {
         lastName: '', 
         userName: '', 
         password: '',
+        submitted: false
     }
     
     handleChange = (e, {name, value}) => this.setState({ [name]: value})
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({submitted: true })
         const {firstName, lastName, userName, password  } = this.state
 
         Adapter.signUp(firstName, lastName, userName, password)
@@ -44,6 +47,12 @@ class SignUpForm extends Component {
 
         return (        
             <div>
+                {this.state.submitted ? 
+                <React.Fragment>
+                <Progress />
+                <h4>Fetching your products from api</h4>
+                </React.Fragment>
+                 : 
                 <Grid columns={3}  centered  >
                 <Grid.Column>
                 <Link to="/login">Login</Link>
@@ -85,6 +94,7 @@ class SignUpForm extends Component {
                         </Form>
                     </Grid.Column>
                 </Grid>
+                    }
             </div>
         );
     }

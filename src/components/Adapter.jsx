@@ -142,6 +142,19 @@ class Adapter {
     static logout() {
         localStorage.removeItem('token');
     }
+
+    // for demo purposes
+    static destructivelyLogout() {
+        return fetch(`${API_URL}/destroy/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
+        localStorage.removeItem('token');
+    }
+
     
     static getJWT() {
         return localStorage.getItem('token');

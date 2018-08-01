@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react'
 
 import TopProductsList from '../components/home/TopProductsList'
+import NeedsToBeShippedList from '../components/home/NeedsToBeShippedList'
 
 class HomeContainer extends Component {
     render() {
@@ -18,9 +19,7 @@ class HomeContainer extends Component {
                         </div>
                     </Grid.Column>
                     <Grid.Column>
-                        <div className="ui segment">
-                            total sales today 100
-                        </div>
+                        < NeedsToBeShippedList />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

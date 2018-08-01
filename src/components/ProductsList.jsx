@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Adapter from './Adapter'
 import ProductListItem from './ProductListItem'
-import {Checkbox, Modal, Button } from 'semantic-ui-react'
-import {Redirect } from 'react-router-dom'
+import {Checkbox } from 'semantic-ui-react'
+
 
 
 
@@ -26,7 +26,7 @@ class ProductsList extends Component {
         Adapter.getAllSkus().then(r => r.json() ).then(d => {
             const sortedData = d.sort( (a, b) => a.value - b.value)
             this.setState({ skus: sortedData })
-        }).catch( e=>  this.props.history.push('/login') )
+        })
     }
 
     // Handles Navigation to product detail page. Based on click from product list page 

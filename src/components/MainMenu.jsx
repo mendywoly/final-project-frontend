@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react'
 import Adapter from './Adapter'
+import { Link } from 'react-router-dom'
+
 
 class MainMenu extends Component {
     state = {}
@@ -28,6 +30,10 @@ class MainMenu extends Component {
         if (name === 'profile') {
             this.props.history.push('/profile')
         }
+        if (name === 'destructivelyLogout') {
+            Adapter.destructivelyLogout()
+            this.props.history.push('/login')
+        }
 
 
     }
@@ -37,15 +43,17 @@ class MainMenu extends Component {
     render() {
         const { activeItem } = this.state
         return (
-            <div>
+            <div>                    
                 <Menu>
-                    <Menu.Item
+                <Link className="item" to="/">Home</Link>
+
+                    {/* <Menu.Item                                               
                         name='home'
                         active={activeItem === 'home'}
-                        onClick={this.handleItemClick}
+                        onClick={<Redirect to="/"/>}
                         >
-                        Home
-                    </Menu.Item>
+                        Home                        
+                    </Menu.Item> */}
 
                     <Menu.Item
                         name='profile'
@@ -99,6 +107,14 @@ class MainMenu extends Component {
                         onClick={this.handleItemClick}
                         >
                         Logout
+                    </Menu.Item>
+
+                     <Menu.Item
+                        name='destructivelyLogout'
+                        active={activeItem === 'destructivelyLogout'}
+                        onClick={this.handleItemClick}
+                        >
+                        Destructively Logout
                     </Menu.Item>
 
                 </Menu>
