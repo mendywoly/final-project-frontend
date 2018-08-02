@@ -32,7 +32,8 @@ class MainMenu extends Component {
         }
         if (name === 'destructivelyLogout') {
             Adapter.destructivelyLogout()
-            this.props.history.push('/login')
+            localStorage.removeItem('token');
+            this.props.history.push('/signup')
         }
 
 
@@ -55,13 +56,7 @@ class MainMenu extends Component {
                         Home                        
                     </Menu.Item> */}
 
-                    <Menu.Item
-                        name='profile'
-                        active={activeItem === 'profile'}
-                        onClick={this.handleItemClick}
-                        >
-                        Profile
-                    </Menu.Item>
+                    
                     <Menu.Item
                         name='products'
                         active={activeItem === 'products'}
@@ -69,29 +64,30 @@ class MainMenu extends Component {
                         >
                         Products
                     </Menu.Item>
-                    <Menu.Item
+                    
+                    {/* <Menu.Item
                         name='reports'
                         active={activeItem === 'reports'}
                         onClick={this.handleItemClick}
                         >
                         Reports
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                    <Menu.Item
+                    {/* <Menu.Item
                         name='fees'
                         active={activeItem === 'fees'}
                         onClick={this.handleItemClick}
                         >
                         Fees
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                    <Menu.Item
+                    {/* <Menu.Item
                         name='returns'
                         active={activeItem === 'returns'}
                         onClick={this.handleItemClick}
                         >
                         Returns
-                    </Menu.Item>
+                    </Menu.Item> */}
 
                      <Menu.Item
                         name='invmanagement'
@@ -115,6 +111,14 @@ class MainMenu extends Component {
                         onClick={this.handleItemClick}
                         >
                         Destructively Logout
+                    </Menu.Item>
+
+                    <Menu.Item
+                        name='profile'
+                        active={activeItem === 'profile'}
+                        onClick={this.handleItemClick}
+                        >
+                        Profile
                     </Menu.Item>
 
                 </Menu>

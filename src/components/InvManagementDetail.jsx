@@ -111,12 +111,12 @@ class InvManagementDetail extends Component {
             <Segment style={{width: '80%', margin: 'auto'}}  >
             <Link to={`/products/` + this.props.product.id}>Go To ProductPage</Link>
 
-                <button 
+                {/* <button 
                     onClick={this.handleClick} 
                     className="ui right floated button"
                 >
                 {this.state.editMode ? 'Save' : 'Edit'}
-                </button>
+                </button> */}
                  {editMode ? edit : show2}
             </Segment> 
             }

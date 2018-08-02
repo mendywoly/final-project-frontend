@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Adapter from './Adapter'
 import ProductListItem from './ProductListItem'
 import {Checkbox } from 'semantic-ui-react'
-
+import ProductsListChecBoxForm from './ProductsListChecBoxForm'
 
 
 
@@ -29,10 +29,6 @@ class ProductsList extends Component {
         })
     }
 
-    // Handles Navigation to product detail page. Based on click from product list page 
-    // handleClick = (id) => {
-    //   this.props.history.push('/products/' + id)
-    // }
 
     // Function to handle all controlled forms
     handleChange = (event) => {
@@ -45,14 +41,6 @@ class ProductsList extends Component {
       }
 
 
-    //   Allow user to search by multiple skus, based on line break, Come back to this later 
-    // splitString = () => {
-    //   const newArr = []
-    //     this.state.asin.split('\n').forEach(sku => {
-    //         newArr.push(this.state.skus.filter( e => e.asin.includes(sku) ))
-    //     });
-    //     return newArr 
-    // }
     
     //   Adds id to array if not checked, and if checked removes it 
     checkedHandler = (event, id) => {
@@ -82,11 +70,13 @@ class ProductsList extends Component {
     
     
     
-    render() {                
+    render() {              
         return (
             <div>
+                
                 <br/>
                 <div className="ui input"   >
+                {this.state.skus.length > 0 ? < ProductsListChecBoxForm products={this.filterProducts()} checked={this.state.checked}/> : null }
                     <input                        
                             type="text"
                             placeholder="Search By Name"

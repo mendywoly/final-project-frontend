@@ -6,11 +6,10 @@ export default class ProgressBar extends Component {
   state = { percent: 0 }
 
     componentDidMount = () => {
-        this.interval = setInterval(this.increment, 1000);
+        this.interval = setInterval(this.increment, 500);
     }
 
     increment = () => {
-        console.log(this.interval)
         this.setState({
         percent: this.state.percent >= 100 ?  this.test() : this.state.percent + 20,
         })

@@ -152,7 +152,7 @@ class Adapter {
                 'Authorization': localStorage.getItem('token')
             },
         })
-        localStorage.removeItem('token');
+        
     }
 
     
