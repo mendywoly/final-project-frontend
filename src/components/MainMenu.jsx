@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react'
 import Adapter from './Adapter'
+import { Link } from 'react-router-dom'
+
 
 class MainMenu extends Component {
     state = {}
@@ -25,6 +27,14 @@ class MainMenu extends Component {
         if (name === 'home') {
             this.props.history.push('/')
         }
+        if (name === 'profile') {
+            this.props.history.push('/profile')
+        }
+        if (name === 'destructivelyLogout') {
+            Adapter.destructivelyLogout()
+            localStorage.removeItem('token');
+            this.props.history.push('/signup')
+        }
 
 
     }
@@ -32,26 +42,21 @@ class MainMenu extends Component {
     
 
     render() {
-        console.log(this.props)
         const { activeItem } = this.state
         return (
-            <div>
+            <div>                    
                 <Menu>
-                    <Menu.Item
+                <Link className="item" to="/">Home</Link>
+
+                    {/* <Menu.Item                                               
                         name='home'
                         active={activeItem === 'home'}
-                        onClick={this.handleItemClick}
+                        onClick={<Redirect to="/"/>}
                         >
-                        Home
-                    </Menu.Item>
+                        Home                        
+                    </Menu.Item> */}
 
-                    <Menu.Item
-                        name='profile'
-                        active={activeItem === 'profile'}
-                        onClick={this.handleItemClick}
-                        >
-                        Profile
-                    </Menu.Item>
+                    
                     <Menu.Item
                         name='products'
                         active={activeItem === 'products'}
@@ -59,29 +64,30 @@ class MainMenu extends Component {
                         >
                         Products
                     </Menu.Item>
-                    <Menu.Item
+                    
+                    {/* <Menu.Item
                         name='reports'
                         active={activeItem === 'reports'}
                         onClick={this.handleItemClick}
                         >
                         Reports
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                    <Menu.Item
+                    {/* <Menu.Item
                         name='fees'
                         active={activeItem === 'fees'}
                         onClick={this.handleItemClick}
                         >
                         Fees
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                    <Menu.Item
+                    {/* <Menu.Item
                         name='returns'
                         active={activeItem === 'returns'}
                         onClick={this.handleItemClick}
                         >
                         Returns
-                    </Menu.Item>
+                    </Menu.Item> */}
 
                      <Menu.Item
                         name='invmanagement'
@@ -97,6 +103,22 @@ class MainMenu extends Component {
                         onClick={this.handleItemClick}
                         >
                         Logout
+                    </Menu.Item>
+
+                     <Menu.Item
+                        name='destructivelyLogout'
+                        active={activeItem === 'destructivelyLogout'}
+                        onClick={this.handleItemClick}
+                        >
+                        Destructively Logout
+                    </Menu.Item>
+
+                    <Menu.Item
+                        name='profile'
+                        active={activeItem === 'profile'}
+                        onClick={this.handleItemClick}
+                        >
+                        Profile
                     </Menu.Item>
 
                 </Menu>

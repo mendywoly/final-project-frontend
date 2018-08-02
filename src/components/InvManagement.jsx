@@ -37,31 +37,24 @@ class InvManagement extends Component {
     }
 
     tableData = () => {
-        return this.state.skus.filter( sku => sku.on_inv_management === true )
+        const filteredSkus = this.state.skus.filter( sku => sku.on_inv_management === true )
+        return filteredSkus.sort( (a, b) =>   Math.floor((a.sellable_quantity + a.reserved_amz + a.in_bound_quantity) / (a.units_shipped_last_30_days / 30)) - Math.floor((b.sellable_quantity + b.reserved_amz + b.in_bound_quantity) / (b.units_shipped_last_30_days / 30))  )
+        // return filteredSkus.sort( (a, b) =>   (Math.floor((b.sellable_quantity + b.reserved_amz + b.in_bound_quantity) / (b.units_shipped_last_30_days / 30)) < b.lead_time) - (Math.floor((a.sellable_quantity + a.reserved_amz + a.in_bound_quantity) / (a.units_shipped_last_30_days / 30)) < a.lead_time)  )
     }
 
-    tableColumns = () => {
-      return [
-        {Header: 'Asin',accessor: 'asin'},
-        {Header: 'Fnsku',accessor: 'fnsku'},
-        {Header: 'Msku',accessor: 'msku'},
-        {Header: 'Available Inv',accessor: 'quantity_amz'},
-        {Header: 'Display?',accessor: 'on_inv_management'},
-      ]
-    }
 
     handleChange = (e, {value}) => {
       Adapter.addSkuToManageInv(value).then(r =>r.json()).then(this.fetchSkus)
     }
+
     
     
-    render() {        
-        console.log(this.state.skus);
-        
+    
+    render() {                
         return (
             <div>
                 <br/>
-                    {this.tableData().map(element =>  <div><InvManagementDetail product={element} fetchSkus={this.fetchSkus} {...this.props}/><br/></div> )}
+                    {this.tableData().map(element =>  <React.Fragment><InvManagementDetail product={element} fetchSkus={this.fetchSkus} {...this.props}/><br/></React.Fragment> )}
                 <br/>
             </div>
         );

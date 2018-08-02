@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Adapter from '../components/Adapter'
-import { Grid, Loader, Segment, Dimmer } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import ProductDetailsDisplay from '../components/product/ProductDetailsDisplay'
 import ProductEditForm from '../components/product/ProductEditForm'
 
@@ -30,7 +30,6 @@ class Product extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
-      console.log(this.state)
     }
 
     handleChange = (event) => {

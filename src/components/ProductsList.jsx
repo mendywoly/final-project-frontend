@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Adapter from './Adapter'
 import ProductListItem from './ProductListItem'
-import {Checkbox, Modal, Button } from 'semantic-ui-react'
+import {Checkbox } from 'semantic-ui-react'
+import ProductsListChecBoxForm from './ProductsListChecBoxForm'
+
 
 
 class ProductsList extends Component {
@@ -21,16 +23,12 @@ class ProductsList extends Component {
 
     // Fetch all skus, Want to change backend to only render the just skus and not details to improve preformance. 
     fetchSkus = () => {
-        Adapter.getAllSkus().then(r => r.json()).then(d => {
+        Adapter.getAllSkus().then(r => r.json() ).then(d => {
             const sortedData = d.sort( (a, b) => a.value - b.value)
             this.setState({ skus: sortedData })
         })
     }
 
-    // Handles Navigation to product detail page. Based on click from product list page 
-    // handleClick = (id) => {
-    //   this.props.history.push('/products/' + id)
-    // }
 
     // Function to handle all controlled forms
     handleChange = (event) => {
@@ -43,14 +41,6 @@ class ProductsList extends Component {
       }
 
 
-    //   Allow user to search by multiple skus, based on line break, Come back to this later 
-    // splitString = () => {
-    //   const newArr = []
-    //     this.state.asin.split('\n').forEach(sku => {
-    //         newArr.push(this.state.skus.filter( e => e.asin.includes(sku) ))
-    //     });
-    //     return newArr 
-    // }
     
     //   Adds id to array if not checked, and if checked removes it 
     checkedHandler = (event, id) => {
@@ -80,38 +70,42 @@ class ProductsList extends Component {
     
     
     
-    render() {                
+    render() {              
         return (
             <div>
+                
                 <br/>
-                <input 
-                        type="text"
-                        placeholder="Search By Name"
-                        name="product_name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                     />
-                    <input 
-                        type="text"
-                        placeholder="Search By Asin"
-                        name="asin"
-                        value={this.state.asin}
-                        onChange={this.handleChange}
-                     />
-                    <input 
-                        type="text"
-                        placeholder="Search By Fnsku"
-                        name="fnsku"
-                        value={this.state.fnsku}
-                        onChange={this.handleChange}
-                    />
-                     <input 
-                        type="text"
-                        placeholder="Search By Msku"
-                        name="msku"
-                        value={this.state.msku}
-                        onChange={this.handleChange}
-                    />
+                <div className="ui input"   >
+                {this.state.skus.length > 0 ? < ProductsListChecBoxForm products={this.filterProducts()} checked={this.state.checked}/> : null }
+                    <input                        
+                            type="text"
+                            placeholder="Search By Name"
+                            name="product_name"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Asin"
+                            name="asin"
+                            value={this.state.asin}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Fnsku"
+                            name="fnsku"
+                            value={this.state.fnsku}
+                            onChange={this.handleChange}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Search By Msku"
+                            name="msku"
+                            value={this.state.msku}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
                     <table  className="ui celled table">
                     <thead>
@@ -121,6 +115,7 @@ class ProductsList extends Component {
                                 onClick={this.handleCheckedAll}
                                 />
                             </th>
+                            <th className="seven wide" >Product Name</th>
                             <th>Asin</th>
                             <th>Fsnku</th>
                             <th>Sku</th>

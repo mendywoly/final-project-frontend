@@ -46,7 +46,11 @@ class LogInForm extends Component {
                 <Grid columns={3}  centered  >
                
                 <Grid.Column>
+                <br/>
+                <br/>
                  <Link to="/signup">Signup</Link>
+                 <br/>
+                 <br/>
                         <Form onSubmit={this.handleSubmit} >
                             <Form.Group  >
                                 <Form.Input 

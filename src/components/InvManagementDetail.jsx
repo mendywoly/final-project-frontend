@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Adapter from './Adapter'
 import { Link } from 'react-router-dom'
+import { Segment } from 'semantic-ui-react'
 
 
 
@@ -30,10 +31,18 @@ class InvManagementDetail extends Component {
         })
     }
 
+
     
     render() {
+        
         const {editMode} = this.state
-        const {asin, quantity_amz, reserved_amz, } = this.props.product
+        const {asin, quantity_amz, reserved_amz, prep_instructions, lead_time, units_shipped_last_30_days, sellable_quantity, in_bound_quantity, product_name } = this.props.product
+
+        const fullStock = sellable_quantity + reserved_amz + in_bound_quantity
+        const days_until_empty = Math.floor(fullStock / (units_shipped_last_30_days / 30))
+        const needsToBeShipped = days_until_empty < lead_time
+
+
         const show = <React.Fragment>
                         <table className="ui celled table">
                             <thead>
@@ -53,8 +62,16 @@ class InvManagementDetail extends Component {
                         </table>
                     </React.Fragment>   
 
+         const show2 = <React.Fragment>
+                        <h5>{product_name}</h5>
+                        <p>{prep_instructions}</p>
+                        <p>DaysUntil Empty: {days_until_empty}</p>
+                        <p>Lead Time: {lead_time}</p>
+                    </React.Fragment>   
+
        
         const edit = <React.Fragment>
+                <p>{prep_instructions}</p>
                         <table className="ui celled table">
                             <thead>
                                     <tr>
@@ -76,18 +93,36 @@ class InvManagementDetail extends Component {
                          </button>
                      </React.Fragment>
 
-        return (
-            <div style={{width: '80%', margin: 'auto'}} className="ui raised segment" >
+        return ( <React.Fragment>
+            {needsToBeShipped ?
+             <Segment style={{width: '80%', margin: 'auto'}} color="red" >
+             <Link to={`/products/` + this.props.product.id}>Go To ProductPage</Link>
+ 
+                 {/* <button 
+                     onClick={this.handleClick} 
+                     className="ui right floated button"
+                 >
+                 {this.state.editMode ? 'Save' : 'Edit'}
+                 </button> */}
+                  {editMode ? edit : show2}
+             </Segment>
+                
+            : 
+            <Segment style={{width: '80%', margin: 'auto'}}  >
             <Link to={`/products/` + this.props.product.id}>Go To ProductPage</Link>
 
-                <button 
+                {/* <button 
                     onClick={this.handleClick} 
                     className="ui right floated button"
                 >
                 {this.state.editMode ? 'Save' : 'Edit'}
-                </button>
-                 {editMode ? edit : show}
-            </div>
+                </button> */}
+                 {editMode ? edit : show2}
+            </Segment> 
+            }
+            
+            
+            </React.Fragment>
         );
     }
 }
