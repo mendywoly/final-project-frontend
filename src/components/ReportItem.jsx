@@ -45,7 +45,7 @@ class ReportItem extends Component {
                 {this.props.reportData.ReportType === '_GET_RESERVED_INVENTORY_DATA_' ? reservedButton : null }
                 {this.props.reportData.ReportType === '_GET_FBA_FULFILLMENT_INVENTORY_HEALTH_DATA_' ? invHealthButton : null }
                 <button className="ui button" onClick={this.handleClick}>Get Details</button>
-                <button className="ui button" onClick={() => this.getReport(this.props.reportData.GeneratedReportId)}>Get Report</button>
+                {/* <button className="ui button" onClick={() => this.getReport(this.props.reportData.GeneratedReportId)}>Get Report</button> */}
                 <ul>
                     {this.state.show ? details : null}
                 </ul>
