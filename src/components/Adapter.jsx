@@ -172,5 +172,26 @@ class Adapter {
         })
     }
 
+
+    static updateInventoryBySku() {
+        return fetch(`${API_URL}/update_inventory/`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
+    }
+
+    static loadReportsToDatabase(type, reportId) {
+        return fetch(`${API_URL}/load_report_to_database?type=${type}&generatedReportId=${reportId}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+        })
+    }
+
 }
 export default Adapter;

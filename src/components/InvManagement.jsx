@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Adapter from './Adapter'
 import InvManagementDetail from './InvManagementDetail'
 import 'react-table/react-table.css'
+import { Card, Button } from 'semantic-ui-react'
 
 
 class InvManagement extends Component {
@@ -47,15 +48,25 @@ class InvManagement extends Component {
       Adapter.addSkuToManageInv(value).then(r =>r.json()).then(this.fetchSkus)
     }
 
+    handleUpdateInventory = () => {
+        Adapter.updateInventoryBySku().then(r=>r.json()).then(data => this.setState({ skus: data }))
+    }
     
     
     
     render() {                
         return (
-            <div>
+            <div style={{width: '80%', margin: 'auto'}}>
+                <br/>
+                <br/>
+                <Button onClick={this.handleUpdateInventory}>Update Inventory</Button>
+                <br/>            
+                <br/>
+            <Card.Group itemsPerRow={3}>
                 <br/>
                     {this.tableData().map(element =>  <React.Fragment><InvManagementDetail product={element} fetchSkus={this.fetchSkus} {...this.props}/><br/></React.Fragment> )}
                 <br/>
+            </Card.Group>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import FeesItemDetail from './FeesItemDetail'
 import FeesItemDetail2 from './FeesItemDetail2'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Card } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 
@@ -63,7 +63,9 @@ class FeesList extends Component {
 
                     <Grid.Row columns={1}>
                         <Grid.Column>
+                            <Card.Group centered>
                             {this.sortedFeesPreview().map(e => <FeesItemDetail2 key={e.id} details={e} mode={this.state.mode}/>)}          
+                            </Card.Group>
                         </Grid.Column>            
                         <Grid.Column>
                             <Segment> 

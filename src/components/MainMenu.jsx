@@ -65,13 +65,13 @@ class MainMenu extends Component {
                         Products
                     </Menu.Item>
                     
-                    {/* <Menu.Item
+                    <Menu.Item
                         name='reports'
                         active={activeItem === 'reports'}
                         onClick={this.handleItemClick}
                         >
                         Reports
-                    </Menu.Item> */}
+                    </Menu.Item>
 
                     {/* <Menu.Item
                         name='fees'
@@ -105,21 +105,21 @@ class MainMenu extends Component {
                         Logout
                     </Menu.Item>
 
-                     <Menu.Item
+                     {/* <Menu.Item
                         name='destructivelyLogout'
                         active={activeItem === 'destructivelyLogout'}
                         onClick={this.handleItemClick}
                         >
                         Destructively Logout
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                    <Menu.Item
+                    {/* <Menu.Item
                         name='profile'
                         active={activeItem === 'profile'}
                         onClick={this.handleItemClick}
                         >
                         Profile
-                    </Menu.Item>
+                    </Menu.Item> */}
 
                 </Menu>
             </div>

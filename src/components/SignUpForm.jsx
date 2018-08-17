@@ -47,6 +47,7 @@ class SignUpForm extends Component {
 
         return (        
             <div>
+                
                 {this.state.submitted ? 
                 <React.Fragment>
                 <Progress />
@@ -54,8 +55,13 @@ class SignUpForm extends Component {
                 </React.Fragment>
                  : 
                 <Grid columns={3}  centered  >
-                <Grid.Column>
+                <Grid.Column centered>
+                    <br/>
+                    <br/>
+                <h1 style={{textAlign: 'center'}}>Rapid Suite Inventory Management</h1>
+                <br/><br/>
                 <Link to="/login">Login</Link>
+                <br/><br/>
                         <Form onSubmit={this.handleSubmit} >
                             <Form.Group  >
                                 <Form.Input 

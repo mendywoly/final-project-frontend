@@ -1,8 +1,8 @@
 import React from 'react'
 
 export default (props) => {    
-    const {msku, fnsku, asin, product_name, sellable_quantity, reserved_amz, units_shipped_last_30_days, in_bound_quantity, sales_rank, desired_days_of_stock } = props.details    
-    const fullStock = sellable_quantity + reserved_amz + in_bound_quantity
+    const {msku, fnsku,quantity_default_warehouse, asin, product_name, sellable_quantity, reserved_amz, units_shipped_last_30_days, in_bound_quantity, sales_rank, desired_days_of_stock, quantity_amz } = props.details    
+    const fullStock = quantity_default_warehouse + quantity_amz + reserved_amz
   return (
     <div className="ui segment">
        <h3>{product_name}</h3>
@@ -27,27 +27,40 @@ export default (props) => {
                     <td>{msku}</td>
                 </tr>
                 <tr>
-                    <td>sellable_quantity</td>
-                    <td>{sellable_quantity}</td>
+                    <td>Default Warehouse</td>
+                    <td>{quantity_default_warehouse}</td>
                 </tr>
                 <tr>
-                    <td>reserved_amz</td>
+                    <td>Quantity Amz</td>
+                    <td>{quantity_amz}</td>
+                </tr>
+                <tr>
+                    <td>Reserved Amz</td>
                     <td>{reserved_amz}</td>
                 </tr>
                 <tr>
-                    <td>in_bound_quantity</td>
+                    <td>Full Stock</td>
+                    <td>{fullStock}</td>
+                </tr>
+                <tr>
+                    <td>Sellable Quantity</td>
+                    <td>{sellable_quantity}</td>
+                </tr>
+             
+                <tr>
+                    <td>In Bound Quantity</td>
                     <td>{in_bound_quantity}</td>
                 </tr>
                 <tr>
-                    <td>units_shipped_last_30_days</td>
+                    <td>Units Shipped Last 30 Days</td>
                     <td>{units_shipped_last_30_days}</td>
                 </tr>
                 <tr>
-                    <td>sales_rank</td>
+                    <td>Sales Rank</td>
                     <td>{sales_rank}</td>
                 </tr>
                 <tr>
-                    <td>desired_days_of_stock</td>
+                    <td>Desired Days Of Stock</td>
                     <td>{desired_days_of_stock}</td>
                 </tr>
                 <tr>
