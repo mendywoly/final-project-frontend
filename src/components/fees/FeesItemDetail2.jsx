@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react'
+import { Segment, Card } from 'semantic-ui-react'
 // import { Link } from 'react-router-dom'
 
 
@@ -11,7 +11,8 @@ class FeesItemDetail2 extends Component {
         const {units_shipped_last_90_days} = this.props.details.product
 
         return (
-            <Segment style={{textAlign: 'center'}} >   
+            <Card style={{textAlign: 'center'}} >   
+                <Card.Content>
                 <h1>{units_shipped_last_90_days}</h1>
                 <h4 >{product_name}</h4>     
                 <p>{product_group}</p>
@@ -51,7 +52,8 @@ class FeesItemDetail2 extends Component {
                      </tbody>                     
                  </table>
                 : null}
-            </Segment>
+                </Card.Content>
+            </Card>
         );
     }
 }

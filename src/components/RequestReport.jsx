@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Dropdown} from 'semantic-ui-react'
 class RequestReport extends Component {
     state = {
         reportName: '',
@@ -21,7 +21,6 @@ class RequestReport extends Component {
     handleReportRequest = (event) => {
       event.preventDefault()
         const fetchBody = this.state.includeDate ?  {report_name: this.state.reportName, start_date: new Date(this.state.startDate).toISOString(), end_date: new Date(this.state.endDate).toISOString()} :  {report_name: this.state.reportName}
-        console.log(fetchBody)
       const config = {
         method: 'POST',
         headers: {
@@ -39,10 +38,17 @@ class RequestReport extends Component {
         this.state.includeDate ? this.setState({includeDate: false }) : this.setState({includeDate: true })        
     }
     
+    handleSelectReport = (d) => {
+      this.setState({reportName: d.value})
+
+    }
     
       
     render() {
-
+        const reportOptions = [
+            {text: 'Inv Health', value: '_GET_FBA_FULFILLMENT_INVENTORY_HEALTH_DATA_'},
+            {text: 'Reserved', value: '_GET_RESERVED_INVENTORY_DATA_'},
+        ]
         const dateData = <React.Fragment>
                          <input 
                             // required
@@ -63,6 +69,13 @@ class RequestReport extends Component {
         return (
             <div className="ui segment">
                       <form onSubmit={this.handleReportRequest}>
+                      <Dropdown 
+                      placeholder='Select Report' 
+                      selection 
+                      options={reportOptions}
+                      onChange={(e,d) => this.handleSelectReport(d)}
+                      />
+                      <br/>
                         <input 
                             // required
                             type="text"

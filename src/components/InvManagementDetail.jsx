@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Adapter from './Adapter'
 import { Link } from 'react-router-dom'
-import { Segment } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 
 
@@ -36,7 +36,7 @@ class InvManagementDetail extends Component {
     render() {
         
         const {editMode} = this.state
-        const {asin, quantity_amz, reserved_amz, prep_instructions, lead_time, units_shipped_last_30_days, sellable_quantity, in_bound_quantity, product_name } = this.props.product
+        const {asin, quantity_amz, reserved_amz, prep_instructions, lead_time, units_shipped_last_30_days, sellable_quantity, in_bound_quantity, product_name, units_shipped_last_7_days, units_shipped_last_24_hrs } = this.props.product
 
         const fullStock = sellable_quantity + reserved_amz + in_bound_quantity
         const days_until_empty = Math.floor(fullStock / (units_shipped_last_30_days / 30))
@@ -65,8 +65,12 @@ class InvManagementDetail extends Component {
          const show2 = <React.Fragment>
                         <h5>{product_name}</h5>
                         <p>{prep_instructions}</p>
+                        <hr/>
                         <p>DaysUntil Empty: {days_until_empty}</p>
                         <p>Lead Time: {lead_time}</p>
+                        <p>Orders Past 24 Hours: {units_shipped_last_24_hrs}</p>
+                        <p>Orders Past 7 Days: {units_shipped_last_7_days}</p>                        
+                        <p>Orders Past 30 Days: {units_shipped_last_30_days}</p>
                     </React.Fragment>   
 
        
@@ -95,7 +99,8 @@ class InvManagementDetail extends Component {
 
         return ( <React.Fragment>
             {needsToBeShipped ?
-             <Segment style={{width: '80%', margin: 'auto'}} color="red" >
+             <Card  color="red" >
+             <Card.Content>
              <Link to={`/products/` + this.props.product.id}>Go To ProductPage</Link>
  
                  {/* <button 
@@ -105,10 +110,12 @@ class InvManagementDetail extends Component {
                  {this.state.editMode ? 'Save' : 'Edit'}
                  </button> */}
                   {editMode ? edit : show2}
-             </Segment>
+                  </Card.Content>
+             </Card>
                 
             : 
-            <Segment style={{width: '80%', margin: 'auto'}}  >
+            <Card   >
+            <Card.Content>
             <Link to={`/products/` + this.props.product.id}>Go To ProductPage</Link>
 
                 {/* <button 
@@ -118,7 +125,8 @@ class InvManagementDetail extends Component {
                 {this.state.editMode ? 'Save' : 'Edit'}
                 </button> */}
                  {editMode ? edit : show2}
-            </Segment> 
+                 </Card.Content>
+            </Card> 
             }
             
             

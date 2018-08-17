@@ -27,7 +27,7 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/login" component={LogInForm}/>
-          <Route exact path="/signup" component={SignUpForm}/>
+          {/* <Route exact path="/signup" component={SignUpForm}/> */}
           {Adapter.isLoggedIn() ?    
           <React.Fragment>
           <MainMenu {...this.props}/> 
@@ -35,7 +35,7 @@ class App extends Component {
           <Route path="/products/:id" component={ (props) => {return ( <ProductContainer {...props}/> )}  }/>
           <Route exact path="/invmanagement" component={ (props) => {return ( <InvManagement {...props}/> )}  }/>
           <Route exact path="/reports" component={ (props) => {return ( <Reports {...props}/> )}  }/>
-          <Route exact path="/fees" component={ (props) => {return ( <FeesContainer {...props}/> )}  }/>
+          {/* <Route exact path="/fees" component={ (props) => {return ( <FeesContainer {...props}/> )}  }/> */}
           <Route exact path="/" component={ (props) => {return ( <HomeContainer {...props} />)} }/>
           <Route exact path="/profile" component={ (props) => {return ( <UpdateUser {...props} />)} }/>
            

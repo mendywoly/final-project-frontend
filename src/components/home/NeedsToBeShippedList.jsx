@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import InvManagementDetail from '../InvManagementDetail'
 import Adapter from '../Adapter'
+import { Card } from 'semantic-ui-react'
+
 class NeedsToBeShippedList extends Component {
 
     state = {
@@ -32,8 +34,11 @@ class NeedsToBeShippedList extends Component {
     
     render() {
         return (
-            <div>
-                {this.filterOnlyLowStock().map(element =>  <React.Fragment><InvManagementDetail product={element} fetchSkus={this.fetchSkus} {...this.props}/><br/></React.Fragment> )}
+            <div style={{width: '80%', margin: 'auto'}}>
+                 <Card.Group itemsPerRow={1}>
+                    {this.filterOnlyLowStock().map(element =>  <React.Fragment><InvManagementDetail product={element} fetchSkus={this.fetchSkus} {...this.props}/><br/></React.Fragment> )}
+                </Card.Group>
+
             </div>
         );
     }
